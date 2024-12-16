@@ -35,9 +35,9 @@
     height: 1.2px;
     position: relative;
     width: calc(100% - 8px);
-  }
+}
 
-  .arrow-box::after {
+.arrow-box::after {
     content: '';
     width: 0;
     height: 0;
@@ -46,4 +46,4 @@
     border-left: 6px solid #000000;
     position: absolute;
     right: -6px;
-  }
+}
