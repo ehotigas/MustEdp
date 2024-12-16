@@ -1,0 +1,30 @@
+.header-container {
+    background-color: #212E3E;
+    float: left;
+    height: 45px;
+    width: 100%;
+}
+
+.main-title {
+    color: #fff;
+    float: left;
+    font-size: 27px;
+    margin-left: 15%;
+    margin-top: 5px;
+}
+
+.sub-title {
+    color: #fff;
+    float: left;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 10PX;
+    margin-top: 12px;
+}
+
+.section {
+    float: left;
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+}
