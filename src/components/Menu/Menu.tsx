@@ -48,7 +48,7 @@ export default function Menu() {
                             <p className={styles.headerTitle}>Configurações</p>
                         </div>
                         <LiaFileContractSolid className={styles.linkIcon}/>
-                        <Link className={styles.link} href="/">Alterar Contratos</Link>
+                        <Link className={styles.link} href="/upload/contratos">Alterar Contratos</Link>
                         <FaChartBar className={styles.linkIcon}/>
                         <Link className={styles.link} href="/upload/params">Alterar Parâmetros</Link>
                         <RiMapPin2Line className={styles.linkIcon}/>

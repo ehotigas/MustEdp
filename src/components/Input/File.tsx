@@ -4,11 +4,13 @@ import { useState } from "react";
 
 interface FileProps {
     onChange?: (file: File | null) => void
+    style?: React.CSSProperties
 }
 
 export default function File(
     {
-        onChange
+        onChange,
+        style
     }: FileProps
 ) {
     const [isActive, setIsActive] = useState(false);
@@ -52,6 +54,7 @@ export default function File(
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             onClick={handleClick}
+            style={style}
         >
         <div className={styles.iconContainer}>
             <IoCloudUploadOutline className={styles.icon} />

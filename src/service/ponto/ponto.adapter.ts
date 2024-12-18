@@ -12,8 +12,8 @@ export class PontoAdapter {
         this.adapter = adapter;
     }
 
-    public async findAll(empresa: Region): Promise<GetPontoDto> {
-        return await this.adapter.fetch(`/ponto?empresa=${empresa}`);
+    public async findAll(): Promise<GetPontoDto> {
+        return await this.adapter.fetch(`/ponto`);
     }
 
     public async create(input: CreatePontoDto): Promise<Ponto> {
@@ -22,7 +22,7 @@ export class PontoAdapter {
             {
                 method: 'POST',
                 headers: { 'Content-Type': "application/json" },
-                body: JSON.stringify(input)
+                data: JSON.stringify(input)
             }
         );
     }
@@ -33,7 +33,7 @@ export class PontoAdapter {
             {
                 method: 'PATCH',
                 headers: { 'Content-Type': "application/json" },
-                body: JSON.stringify(input)
+                data: JSON.stringify(input)
             }
         );
     }

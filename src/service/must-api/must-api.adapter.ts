@@ -1,5 +1,7 @@
+import axios, { AxiosRequestConfig } from "axios";
+
 export interface IMustApiAdapter {
-    fetch: <T>(uri: string, init?: RequestInit) => Promise<T>
+    fetch: <T>(uri: string, init?: AxiosRequestConfig) => Promise<T>
 }
 
 
@@ -10,8 +12,8 @@ export class MustApiAdapter implements IMustApiAdapter {
         this._url = "http://localhost:4042";
     }
 
-    public async fetch<T>(uri: string, init?: RequestInit): Promise<T> {
-        const request = await fetch(`${this._url}${uri}`, init);
-        return await request.json();
+    public async fetch<T>(uri: string, init?: AxiosRequestConfig): Promise<T> {
+        const request = await axios(`${this._url}${uri}`, { ...init });
+        return await request.data;
     }
 }

@@ -1,3 +1,4 @@
+import PopupProvider from "@/components/popup/popup-provider";
 import Menu from "@/components/menu/menu";
 import { Dosis } from "next/font/google";
 import styles from "./layout.module.css";
@@ -20,26 +21,28 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <header className={styles.header}>
-          <Link href="/">
-            <img
-              className={styles.imageIcon}
-              src="./favicon.ico"
-            />
-            <p className={styles.iconName}>
-              edp
-            </p>
-          </Link>
-          <div className={styles.info}>
-            <Menu/>
-          </div> 
-          <Link href="/">
-            <p className={styles.info}>
-              Home
-            </p>
-          </Link>
-        </header>
-        {children}
+        <PopupProvider>
+          <header className={styles.header}>
+            <Link href="/">
+              <img
+                className={styles.imageIcon}
+                src="/favicon.ico"
+              />
+              <p className={styles.iconName}>
+                edp
+              </p>
+            </Link>
+            <div className={styles.info}>
+              <Menu/>
+            </div> 
+            <Link href="/">
+              <p className={styles.info}>
+                Home
+              </p>
+            </Link>
+          </header>
+          {children}
+        </PopupProvider>
       </body>
     </html>
   );

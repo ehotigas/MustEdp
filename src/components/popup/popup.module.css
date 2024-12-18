@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
+.popupContainer {
+    background-color: #fff;
+    font-family: 'Dosis';
+    left: calc((100% - 400px)/2);
+    position: fixed;
+    top: 70px;
+    width: 400px;
+    z-index: 5;
+}
+
+.popupTitleContainer {
+    background-color: #28FF52;
+    height: 30px;
+    font-family: 'Dosis';
+    float: left;
+    width: 100%;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 2px;
+    text-align: center;
+}
+
+.popupBodyContainer {
+    color: #222;
+    float: left;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 5px;
+    text-align: center;
+    width: calc(100% - 20px);
+}
+
+.popupFooterContainer {
+    align-items: center;
+    float: left;
+    margin-bottom: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+.popupTimerContainer {
+    float: left;
+    height: 5px;
+    width: 100%;
+}
+
+.popupTimeBar {
+    float: left;
+    height: 5px;
+}

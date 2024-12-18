@@ -1,11 +1,11 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
-import styles from "./Dropdown.module.css";
+import styles from "./dropdown.module.css";
 import { uuid } from "uuidv4";
 
 interface DropdownProps {
-    defaultValue?: string | null;
+    defaultValue?: string;
     onChange?: (value: string) => void;
     options: string[];
     style?: React.CSSProperties;
@@ -22,7 +22,7 @@ export default function Dropdown(
     }: DropdownProps
 ) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [value, setValue] = useState<string>(defaultValue || options[0]);
+    const [value, setValue] = useState<string>(defaultValue === undefined ? options[0] : defaultValue);
     const ref = useRef<HTMLDivElement>(null);
     const optionRef = useRef<HTMLDivElement>(null);
 

@@ -1,11 +1,10 @@
-import { DataType } from "../data-type";
 import { Posto } from "@/types/posto";
 
-export interface CreateParamDto {
+
+export interface CreateContratoByDemanda {
     ponto: string;
     posto: Posto;
     data: Date | string;
-    tipoDado: DataType;
     cenario: string;
     valor: number;
 }

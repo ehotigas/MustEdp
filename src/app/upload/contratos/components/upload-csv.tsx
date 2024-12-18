@@ -1,8 +1,8 @@
 "use client";
-import { CreateParamDto } from "@/service/param/dto/create-param.dto";
+import { CreateContratoByDemanda } from "@/service/contrato/dto/create-contrato-by-demanda.dto";
+import { ContratoAdapter } from "@/service/contrato/contrato.adapter";
 import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
 import { PopupContext } from "@/components/popup/popup-provider";
-import { ParamAdapter } from "@/service/param/param.adapter";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { CsvParser } from "@/csv/csv-parser";
 import { PiTableFill } from "react-icons/pi";
@@ -30,7 +30,7 @@ export const UploadCsv: React.FC<UploadCsvProps> = ({
 }) => {
     const popup = useContext(PopupContext);
     const api = new MustApiAdapter();
-    const paramAdapter = new ParamAdapter(api);
+    const contratoAdapter = new ContratoAdapter(api);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
@@ -49,7 +49,7 @@ export const UploadCsv: React.FC<UploadCsvProps> = ({
         setFile(file);
     }
 
-    const dataFormatter = (row: CreateParamDto): CreateParamDto => {
+    const dataFormatter = (row: CreateContratoByDemanda): CreateContratoByDemanda => {
         const valor = parseFloat(row.valor.toString().replace(csvParams.decimal, '.'));
     
         
@@ -66,11 +66,9 @@ export const UploadCsv: React.FC<UploadCsvProps> = ({
         setIsLoading(true);
         const text = await file?.text();
         if (text) {
-            const data = await csvParser.parse<CreateParamDto>(text, { separator: csvParams.separator }, dataFormatter);
+            const data = await csvParser.parse<CreateContratoByDemanda>(text, { separator: csvParams.separator }, dataFormatter);
             try {
-                await paramAdapter.saveMany({
-                    payload: data.filter((value) => value.cenario === "DEMANDA" ? new Date(value.data) > new Date() : true)
-                });
+                await contratoAdapter.saveManyByDemanda({ payload: data });
             } catch(error) {
                 popup("Erro", `Erro ao enviar os dados. ${(error as any).message}`, "red");
             }
@@ -82,7 +80,7 @@ export const UploadCsv: React.FC<UploadCsvProps> = ({
     return (
         <>
             <section className={styles.section}>
-                Para atualizar a base de parâmetros, é necessário fazer o <strong>envio de um arquivo .csv</strong> com o seguinte template:
+                Para atualizar a base de contratos, é necessário fazer o <strong>envio de um arquivo .csv</strong> com o seguinte template:
             </section>
  
             <section className={styles.section}>
@@ -93,7 +91,6 @@ export const UploadCsv: React.FC<UploadCsvProps> = ({
                     </p>
                     <p className={styles.schemaLine}><span>posto:</span> string ("Ponta", "Fora Ponta") </p>
                     <p className={styles.schemaLine}><span>data:</span> Date </p>
-                    <p className={styles.schemaLine}><span>tipoDado:</span> string ("DEMANDA", "TARIFA", "CONFIABILIDADE") </p>
                     <p className={styles.schemaLine}><span>cenario:</span> string | null </p>
                     <p className={styles.schemaLine}><span>valor:</span> string </p>
                     <p className={styles.schemaLine} style={{ marginBottom: "5px" }}><span>ponto:</span> string // id de um dos pontos </p>
@@ -102,7 +99,7 @@ export const UploadCsv: React.FC<UploadCsvProps> = ({
 
             <section className={styles.section}>
                 <strong>
-                    Selecione o arquivo para atualizar a base de parâmetros:
+                    Selecione o arquivo para atualizar a base de contratos:
                 </strong>
             </section>
 
