@@ -1,12 +1,12 @@
 import { CreateManyParamResponseDto } from "./dto/create-many-param-response.dto";
+import { RemoveDemandaByCenarioDto } from "./dto/remove-demanda-by-cenario.dto";
 import { CreateManyParamDto } from "./dto/create-many-param.dto";
 import { GetFilterHeaderDto } from "./dto/get-filter-header.dto";
 import { IMustApiAdapter } from "../must-api/must-api.adapter";
+import { GetParamTableDto } from "./dto/get-param-table.dto";
 import { CreateParamDto } from "./dto/create-param.dto";
 import { GetParamDto } from "./dto/get-param.dto";
 import { Param } from "./param.entity";
-import { Posto } from "@/types/posto";
-import { GetParamTableDto } from "./dto/get-param-table.dto";
 
 
 export class ParamAdapter {
@@ -67,6 +67,13 @@ export class ParamAdapter {
     public async remove(id: number): Promise<Param> {
         return await this.adapter.fetch(
             `/param/${id}`,
+            { method: "DELETE" }
+        );
+    }
+
+    public async removeDemandaByCenario(cenario: string): Promise<RemoveDemandaByCenarioDto> {
+        return await this.adapter.fetch(
+            `/param/cenario/${cenario}`,
             { method: "DELETE" }
         );
     }

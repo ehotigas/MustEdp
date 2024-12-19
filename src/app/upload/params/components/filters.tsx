@@ -2,9 +2,10 @@
 import { GetFilterHeaderDto } from "@/service/param/dto/get-filter-header.dto";
 import { Button } from "@/components/input/button";
 import Dropdown from "@/components/input/dropdown";
+import { BiSearchAlt } from "react-icons/bi";
 import styles from "./filters.module.css";
 import { useState } from "react";
-import { BiSearchAlt } from "react-icons/bi";
+
 
 interface FilterProps {
     ano: string;
@@ -19,6 +20,7 @@ type FilterForm = {
     ano: string;
     cenario: string;
 }
+
 
 export const Filters: React.FC<FilterProps> = ({
     ano,

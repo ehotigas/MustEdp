@@ -9,16 +9,18 @@ const Color = {
 export interface DemandaNameProps {
     color?: keyof typeof Color
     name: string;
+    key?: React.Key;
     style?: React.CSSProperties;
 }
 
 export const DemandaName: React.FC<DemandaNameProps> = ({
     color="green",
     name,
+    key,
     style
 }) => {
     return (
-        <div className={styles["container"]} style={style}>
+        <div className={styles["container"]} style={style} key={key}>
             <div className={styles["arrow-box"]}></div>
 
             <div className={styles["demanda-name-container"]} style={{ backgroundColor: Color[color] }}>

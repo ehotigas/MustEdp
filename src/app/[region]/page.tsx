@@ -1,13 +1,31 @@
+import { SimuladorAdapter } from "@/service/simulador/simulador.adapter";
+import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
 import { ContratoTableRow } from "./component/contrato-table-row";
 import { InformationField } from "./component/info-field";
 import styles from "./page.module.css";
+import { Simulador } from "@/service/simulador/simulador.entity";
+import { v4 } from "uuid";
 
 
-export default function RegionPage(
+export default async function RegionPage(
     {
 
     }
 ) {
+    const api = new MustApiAdapter();
+    const simuladorAdapter = new SimuladorAdapter(api);
+
+    const simuladorData = await simuladorAdapter.findTableData(2025);
+
+    const formatData = (): Record<string, Simulador[]> => {
+        let data: Record<string, Simulador[]> = {};
+        const dataKeys = new Set(simuladorData.data.map((value) => value.tipoContrato));
+        dataKeys.forEach((key) => data[key] = []);
+        simuladorData.data.forEach((value) => data[value.tipoContrato].push(value));
+        return data;
+    }
+    const formattedData = formatData();
+
     return (
         <main className={styles["main-container"]}>
             <div className={styles["header-container"]}>
@@ -54,9 +72,12 @@ export default function RegionPage(
                     </div>
                 </div>
                 <div className={styles["table-body"]}>
-                    <ContratoTableRow />
+                    {Object.keys(formattedData).map((key, index) => (
+                        <ContratoTableRow data={formattedData[key]} key={v4()} name={key} style={{ backgroundColor: index % 2 === 0 ? "#fff" : "#EAEAEA" }} />
+                    ))}
+                    {/* <ContratoTableRow />
                     <ContratoTableRow style={{ backgroundColor: "#fff" }} />
-                    <ContratoTableRow />
+                    <ContratoTableRow /> */}
                 </div>
             </div>
 

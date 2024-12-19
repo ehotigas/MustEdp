@@ -2,6 +2,7 @@ import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
 import { ParamAdapter } from "@/service/param/param.adapter";
 import { ParamTable } from "@/service/param/param-table.dto";
 import { PontoAdapter } from "@/service/ponto/ponto.adapter";
+import { DeleteParam } from "./components/delete-param";
 import { UploadCsv } from "./components/upload-csv";
 import { Filters } from "./components/filters";
 import { Table } from "./components/table";
@@ -50,6 +51,11 @@ export default async function UploadParamsPage(
                 data.length > 0 ? <Table cenario={context.searchParams.cenario} data={data} ponto={context.searchParams.ponto.includes(" - ") ? context.searchParams.ponto.split(" - ")[0] : ""} /> :
                 <p className={styles["message"]}>Sem dados. Tente alterar os filtros e clique no botão "pesquisar".</p>
             }
+
+            <header className={styles["header-container"]}>
+                <h1 className={styles["main-title"]}>Deletar Parâmetros </h1>
+            </header>
+            <DeleteParam param={paramFilterHeader} />
         </main>
     );
 }
