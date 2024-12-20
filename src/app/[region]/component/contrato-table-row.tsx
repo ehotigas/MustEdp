@@ -3,6 +3,7 @@ import styles from "./contrato-table-row.module.css";
 import { DemandaName } from "./demanda-name";
 import { ResultRow } from "./result-row";
 import { v4 } from "uuid";
+import { getColor } from "@/types/color";
 
 interface ContratoTableRowProps {
     data: Simulador[];
@@ -28,7 +29,7 @@ export const ContratoTableRow: React.FC<ContratoTableRowProps> = ({
     return (
         <div className={styles["container"]} style={style} key={key}>
             <div className={styles["field-container"]} style={{ marginLeft: "4%" }}>
-                <p className={styles["contrato-otimo-field"]} style={{ color: "#3A6C72" }}>
+                <p className={styles["contrato-otimo-field"]} style={{ color: getColor(name) }}>
                     <strong>{name}</strong>
                 </p>
             </div>
@@ -42,8 +43,8 @@ export const ContratoTableRow: React.FC<ContratoTableRowProps> = ({
             </div>
 
             <div className={styles["field-container"]}>
-                {data.map((value, index) => (
-                    <DemandaName color={index % 3 === 0 ? "green" : index % 3 === 1 ? "yellow" : "orange"} name={value.tipoDemanda} key={v4()} />
+                {data.map((value) => (
+                    <DemandaName name={value.tipoDemanda} key={v4()} />
                 ))}
             </div>
             

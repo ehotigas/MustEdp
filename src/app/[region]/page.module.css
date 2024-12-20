@@ -78,3 +78,31 @@
     float: left;
     width: 100%;
 }
+
+.penalidades-container {
+    float: left;
+    height: 300px;
+    overflow: auto;
+    margin-bottom: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+
+.penalide-header-container {
+    border-bottom: solid 1px #000;
+    float: left;
+    height: 28px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 15px;
+    width: 90%;
+}
+
+.header-cell {
+    font-size: 12px;
+    font-weight: bolder;
+    float: left;
+    text-align: center;
+    width: 17%;
+}

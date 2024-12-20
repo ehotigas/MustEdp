@@ -1,19 +1,24 @@
 import { SimuladorAdapter } from "@/service/simulador/simulador.adapter";
+import { PenalidadeAdapter } from "@/service/penalidade/penalidade.adapter";
 import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
 import { ContratoTableRow } from "./component/contrato-table-row";
-import { InformationField } from "./component/info-field";
-import styles from "./page.module.css";
 import { Simulador } from "@/service/simulador/simulador.entity";
+import { PenalidadeRow } from "./component/penalidade-row";
+import { InformationField } from "./component/info-field";
+import { Region } from "@/types/region";
+import styles from "./page.module.css";
 import { v4 } from "uuid";
 
 
 export default async function RegionPage(
-    {
-
+    context: {
+        param: { region: Region },
+        searchParams: {}
     }
 ) {
     const api = new MustApiAdapter();
     const simuladorAdapter = new SimuladorAdapter(api);
+    const penalidadeAdapter = new PenalidadeAdapter(api);
 
     const simuladorData = await simuladorAdapter.findTableData(2025);
 
@@ -25,6 +30,7 @@ export default async function RegionPage(
         return data;
     }
     const formattedData = formatData();
+    const penalidades = await penalidadeAdapter.findAll(2025);
 
     return (
         <main className={styles["main-container"]}>
@@ -75,15 +81,22 @@ export default async function RegionPage(
                     {Object.keys(formattedData).map((key, index) => (
                         <ContratoTableRow data={formattedData[key]} key={v4()} name={key} style={{ backgroundColor: index % 2 === 0 ? "#fff" : "#EAEAEA" }} />
                     ))}
-                    {/* <ContratoTableRow />
-                    <ContratoTableRow style={{ backgroundColor: "#fff" }} />
-                    <ContratoTableRow /> */}
                 </div>
             </div>
 
             <div className={styles["header-container"]} style={{ marginTop: "20px" }}>
                 <h1 className={styles["main-title"]}>Penalidades:</h1>
             </div>
+
+            <div className={styles["penalide-header-container"]}>
+                    <p className={styles["header-cell"]} style={{ marginLeft: "4%" }}>Ponto</p>
+                    <p className={styles["header-cell"]}>Contrato</p>
+                    <p className={styles["header-cell"]}>Demanda</p>
+                    <p className={styles["header-cell"]} style={{ width: "41%" }}>Custos</p>
+            </div>
+            <section className={styles["penalidades-container"]}>
+                {penalidades.data.map((row) => <PenalidadeRow data={row}/>)}
+            </section>
         </main>
     );
 }
