@@ -1,5 +1,6 @@
 import { GetSimuladorDataDto } from "./dto/get-simulador-data.dto";
 import { IMustApiAdapter } from "../must-api/must-api.adapter";
+import { Region } from "@/types/region";
 
 
 export class SimuladorAdapter {
@@ -8,7 +9,7 @@ export class SimuladorAdapter {
         this.adapter = adapter;
     }
 
-    public async findTableData(year: number): Promise<GetSimuladorDataDto> {
-        return await this.adapter.fetch(`/simulador/${year}`);
+    public async findTableData(year: number, region: Region): Promise<GetSimuladorDataDto> {
+        return await this.adapter.fetch(`/simulador/${year}?region=${region}`);
     }
 }

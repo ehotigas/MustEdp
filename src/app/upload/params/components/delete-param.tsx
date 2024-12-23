@@ -49,7 +49,7 @@ export const DeleteParam: React.FC<DeleteParamProps> = ({
                 options={param.cenario}
                 title="Demanda"
             />
-            <Button isLoading={isLoading} onClick={deleteButtonClickHandler} style={{ height: "35px", marginLeft: "15px", width: "35px" }}>
+            <Button isLoading={isLoading} onClick={deleteButtonClickHandler} style={{ backgroundColor: "#E32C2C", height: "35px", marginLeft: "15px", width: "35px" }}>
                 <BiTrash className={styles["search-icon"]} />
             </Button>
         </section>

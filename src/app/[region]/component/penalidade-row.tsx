@@ -7,16 +7,19 @@ import styles from "./penalidade-row.module.css";
 import { InformationField } from "./info-field";
 import Modal from "@/components/modal/modal";
 import { getColor } from "@/types/color";
+import { Region } from "@/types/region";
 import { useState } from "react";
 
 
 interface IPenalidadeRow {
     data: Penalidade;
+    region: Region;
 }
 
 
 export const PenalidadeRow: React.FC<IPenalidadeRow> = ({
-    data
+    data,
+    region
 }) => {
     const api = new MustApiAdapter();
     const penalidadeAdapter = new PenalidadeAdapter(api);
@@ -27,7 +30,7 @@ export const PenalidadeRow: React.FC<IPenalidadeRow> = ({
     const rowClickEventHandler = async () => {
         setIsOpen(true);
         if(chartData.length === 0) {
-            const response = await penalidadeAdapter.findPenalidadeChat(parseInt(data.data.toString().slice(0, 4)), data.ponto, data.posto, data.tipoContrato, data.tipoDemanda);
+            const response = await penalidadeAdapter.findPenalidadeChat(parseInt(data.data.toString().slice(0, 4)), data.ponto, data.posto, data.tipoContrato, data.tipoDemanda, region);
             setChartData(response.data);
         }
     }

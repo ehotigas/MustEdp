@@ -1,8 +1,10 @@
 import { SimuladorAdapter } from "@/service/simulador/simulador.adapter";
 import { PenalidadeAdapter } from "@/service/penalidade/penalidade.adapter";
+import { ContratoAdapter } from "@/service/contrato/contrato.adapter";
 import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
 import { ContratoTableRow } from "./component/contrato-table-row";
 import { Simulador } from "@/service/simulador/simulador.entity";
+import { FiltroSimulador } from "./component/filtro-simulador";
 import { PenalidadeRow } from "./component/penalidade-row";
 import { InformationField } from "./component/info-field";
 import { Region } from "@/types/region";
@@ -12,15 +14,17 @@ import { v4 } from "uuid";
 
 export default async function RegionPage(
     context: {
-        param: { region: Region },
-        searchParams: {}
+        params: { region: Region },
+        searchParams: { periodo: string }
     }
 ) {
     const api = new MustApiAdapter();
     const simuladorAdapter = new SimuladorAdapter(api);
     const penalidadeAdapter = new PenalidadeAdapter(api);
+    const contratoAdapter = new ContratoAdapter(api);
 
-    const simuladorData = await simuladorAdapter.findTableData(2025);
+    const simuladorData = await simuladorAdapter.findTableData(2025, context.params.region);
+    const periodo = await contratoAdapter.findTableFilters();
 
     const formatData = (): Record<string, Simulador[]> => {
         let data: Record<string, Simulador[]> = {};
@@ -30,13 +34,18 @@ export default async function RegionPage(
         return data;
     }
     const formattedData = formatData();
-    const penalidades = await penalidadeAdapter.findAll(2025);
+    const penalidades = await penalidadeAdapter.findAll(2025, context.params.region);
 
     return (
         <main className={styles["main-container"]}>
             <div className={styles["header-container"]}>
+                <h1 className={styles["main-title"]}>Filtros:</h1>
+            </div>
+            <FiltroSimulador region={context.params.region} options={periodo.ano} />
+
+            <div className={styles["header-container"]}>
                 <h1 className={styles["main-title"]}>MUST 2025:</h1>
-                <h2 className={styles["sub-title"]}> Resultados (EDP SP)</h2>
+                <h2 className={styles["sub-title"]}> Resultados (EDP {context.params.region.toUpperCase()})</h2>
             </div>
 
             <div className={styles["contrato-orcado-container"]} style={{ marginTop: "20px" }}>
@@ -95,7 +104,7 @@ export default async function RegionPage(
                     <p className={styles["header-cell"]} style={{ width: "41%" }}>Custos</p>
             </div>
             <section className={styles["penalidades-container"]}>
-                {penalidades.data.map((row) => <PenalidadeRow data={row}/>)}
+                {penalidades.data.map((row) => <PenalidadeRow data={row} region={context.params.region} />)}
             </section>
         </main>
     );
