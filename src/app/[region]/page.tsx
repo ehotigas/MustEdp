@@ -1,7 +1,8 @@
-import { SimuladorAdapter } from "@/service/simulador/simulador.adapter";
 import { PenalidadeAdapter } from "@/service/penalidade/penalidade.adapter";
+import { SimuladorAdapter } from "@/service/simulador/simulador.adapter";
 import { ContratoAdapter } from "@/service/contrato/contrato.adapter";
 import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
+import { Penalidade } from "@/service/penalidade/penalidade.entity";
 import { ContratoTableRow } from "./component/contrato-table-row";
 import { Simulador } from "@/service/simulador/simulador.entity";
 import { FiltroSimulador } from "./component/filtro-simulador";
@@ -10,6 +11,7 @@ import { InformationField } from "./component/info-field";
 import { Region } from "@/types/region";
 import styles from "./page.module.css";
 import { v4 } from "uuid";
+
 
 
 export default async function RegionPage(
@@ -23,28 +25,34 @@ export default async function RegionPage(
     const penalidadeAdapter = new PenalidadeAdapter(api);
     const contratoAdapter = new ContratoAdapter(api);
 
-    const simuladorData = await simuladorAdapter.findTableData(2025, context.params.region);
+    let simuladorData: Simulador[] = [];
+    let penalidades: Penalidade[] = [];
+
+    if (context.searchParams.periodo) {
+        simuladorData = (await simuladorAdapter.findTableData(parseInt(context.searchParams.periodo), context.params.region)).data;
+        penalidades = (await penalidadeAdapter.findAll(parseInt(context.searchParams.periodo), context.params.region)).data;
+    }
+
     const periodo = await contratoAdapter.findTableFilters();
 
     const formatData = (): Record<string, Simulador[]> => {
         let data: Record<string, Simulador[]> = {};
-        const dataKeys = new Set(simuladorData.data.map((value) => value.tipoContrato));
+        const dataKeys = new Set(simuladorData.map((value) => value.tipoContrato));
         dataKeys.forEach((key) => data[key] = []);
-        simuladorData.data.forEach((value) => data[value.tipoContrato].push(value));
+        simuladorData.forEach((value) => data[value.tipoContrato].push(value));
         return data;
     }
     const formattedData = formatData();
-    const penalidades = await penalidadeAdapter.findAll(2025, context.params.region);
 
     return (
         <main className={styles["main-container"]}>
             <div className={styles["header-container"]}>
                 <h1 className={styles["main-title"]}>Filtros:</h1>
             </div>
-            <FiltroSimulador region={context.params.region} options={periodo.ano} />
+            <FiltroSimulador region={context.params.region} periodo={context.searchParams.periodo} options={periodo.ano} />
 
             <div className={styles["header-container"]}>
-                <h1 className={styles["main-title"]}>MUST 2025:</h1>
+                <h1 className={styles["main-title"]}>MUST {context.searchParams.periodo}:</h1>
                 <h2 className={styles["sub-title"]}> Resultados (EDP {context.params.region.toUpperCase()})</h2>
             </div>
 
@@ -104,7 +112,7 @@ export default async function RegionPage(
                     <p className={styles["header-cell"]} style={{ width: "41%" }}>Custos</p>
             </div>
             <section className={styles["penalidades-container"]}>
-                {penalidades.data.map((row) => <PenalidadeRow data={row} region={context.params.region} />)}
+                {penalidades.map((row) => <PenalidadeRow data={row} region={context.params.region} />)}
             </section>
         </main>
     );

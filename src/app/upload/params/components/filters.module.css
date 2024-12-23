@@ -10,3 +10,23 @@
     font-size: 25px;
     margin-top: 4px;
 }
+
+.chart-icon {
+    font-size: 18px;
+    margin-top: 2px;
+}
+
+.chart-title {
+    float: left;
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+}
+
+.chart-info-container {
+    align-items: center;
+    float: left;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}

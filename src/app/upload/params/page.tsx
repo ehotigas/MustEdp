@@ -1,3 +1,4 @@
+import { YearDemandaChartSection } from "./components/year-demanda-chart-section";
 import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
 import { ParamAdapter } from "@/service/param/param.adapter";
 import { ParamTable } from "@/service/param/param-table.dto";
@@ -56,6 +57,11 @@ export default async function UploadParamsPage(
                 <h1 className={styles["main-title"]}>Deletar Parâmetros </h1>
             </header>
             <DeleteParam param={paramFilterHeader} />
+            
+            <header className={styles["header-container"]}>
+                <h1 className={styles["main-title"]}>Gráfico Demanda </h1>
+            </header>
+            <YearDemandaChartSection />
         </main>
     );
 }

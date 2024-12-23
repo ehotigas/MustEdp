@@ -1,12 +1,15 @@
 import { CreateManyParamResponseDto } from "./dto/create-many-param-response.dto";
 import { RemoveDemandaByCenarioDto } from "./dto/remove-demanda-by-cenario.dto";
 import { CreateManyParamDto } from "./dto/create-many-param.dto";
+import { GetDemandaChartDto } from "./dto/get-demanda-chart.dto";
 import { GetFilterHeaderDto } from "./dto/get-filter-header.dto";
 import { IMustApiAdapter } from "../must-api/must-api.adapter";
 import { GetParamTableDto } from "./dto/get-param-table.dto";
 import { CreateParamDto } from "./dto/create-param.dto";
 import { GetParamDto } from "./dto/get-param.dto";
+import { Region } from "@/types/region";
 import { Param } from "./param.entity";
+import { Posto } from "@/types/posto";
 
 
 export class ParamAdapter {
@@ -25,6 +28,14 @@ export class ParamAdapter {
 
     public async findParamTable(ponto: string, ano: number, cenario: string): Promise<GetParamTableDto> {
         return await this.adapter.fetch(`/param/table/${ponto}?&ano=${ano}&cenario=${cenario}`);
+    }
+
+    public async findDemandaChart(ponto: string, posto: Posto, year: number): Promise<GetDemandaChartDto> {
+        return await this.adapter.fetch(`/param/demanda/chart/${ponto}?posto=${posto}&ano=${year}`);
+    }
+
+    public async findYearDemandaChart(region: Region, posto: Posto): Promise<GetDemandaChartDto> {
+        return await this.adapter.fetch(`/param/demanda/chart/yearly/${region}?posto=${posto}`);
     }
 
     public async getFilterHeader(): Promise<GetFilterHeaderDto> {
