@@ -1,3 +1,4 @@
+import { SimuladorContratoTable } from "@/service/contrato/simulador-contrato-table.entity";
 import { PenalidadeAdapter } from "@/service/penalidade/penalidade.adapter";
 import { SimuladorAdapter } from "@/service/simulador/simulador.adapter";
 import { ContratoAdapter } from "@/service/contrato/contrato.adapter";
@@ -6,18 +7,31 @@ import { Penalidade } from "@/service/penalidade/penalidade.entity";
 import { ContratoTableRow } from "./component/contrato-table-row";
 import { Simulador } from "@/service/simulador/simulador.entity";
 import { FiltroSimulador } from "./component/filtro-simulador";
+import { ContratoFilter } from "./component/contrato-filter";
 import { PenalidadeRow } from "./component/penalidade-row";
 import { InformationField } from "./component/info-field";
 import { Region } from "@/types/region";
 import styles from "./page.module.css";
 import { v4 } from "uuid";
+import { CenarioContratoTable } from "./component/cenario-contrato-table";
 
+
+export const generateUrl = (region: Region, periodo?: string, contrato?: string) => {
+    let url = `/${region}?`;
+    if (periodo) {
+        url += `periodo=${periodo}&`
+    }
+    if (contrato) {
+        url += `contrato=${contrato}`
+    }
+    return url;
+}
 
 
 export default async function RegionPage(
     context: {
         params: { region: Region },
-        searchParams: { periodo: string }
+        searchParams: { periodo: string, contrato: string }
     }
 ) {
     const api = new MustApiAdapter();
@@ -27,10 +41,15 @@ export default async function RegionPage(
 
     let simuladorData: Simulador[] = [];
     let penalidades: Penalidade[] = [];
+    let contratos: SimuladorContratoTable[] = [];
 
     if (context.searchParams.periodo) {
         simuladorData = (await simuladorAdapter.findTableData(parseInt(context.searchParams.periodo), context.params.region)).data;
         penalidades = (await penalidadeAdapter.findAll(parseInt(context.searchParams.periodo), context.params.region)).data;
+    }
+
+    if (context.searchParams.periodo && context.searchParams.contrato) {
+        contratos = (await contratoAdapter.findSimuladorContratoTable(context.searchParams.contrato, context.searchParams.periodo)).data;
     }
 
     const periodo = await contratoAdapter.findTableFilters();
@@ -49,7 +68,7 @@ export default async function RegionPage(
             <div className={styles["header-container"]}>
                 <h1 className={styles["main-title"]}>Filtros:</h1>
             </div>
-            <FiltroSimulador region={context.params.region} periodo={context.searchParams.periodo} options={periodo.ano} />
+            <FiltroSimulador region={context.params.region} periodo={context.searchParams.periodo} contrato={context.searchParams.contrato} options={periodo.ano} />
 
             <div className={styles["header-container"]}>
                 <h1 className={styles["main-title"]}>MUST {context.searchParams.periodo}:</h1>
@@ -101,6 +120,11 @@ export default async function RegionPage(
                 </div>
             </div>
 
+            <div className={styles["header-container"]} style={{ marginTop: "20px" }}>
+                <h1 className={styles["main-title"]}>Contratos {context.searchParams.periodo}:</h1>
+            </div>
+                <ContratoFilter contrato={context.searchParams.contrato} options={Object.keys(formattedData)} periodo={context.searchParams.periodo} region={context.params.region} />
+                <CenarioContratoTable data={contratos}/>
             <div className={styles["header-container"]} style={{ marginTop: "20px" }}>
                 <h1 className={styles["main-title"]}>Penalidades:</h1>
             </div>

@@ -1,8 +1,10 @@
 "use client"
 import Dropdown from "@/components/input/dropdown";
 import { Region } from "@/types/region";
+import { generateUrl } from "../page";
 
 interface FiltroSimuladorProps {
+    contrato: string;
     options: string[];
     periodo?: string;
     region: Region;
@@ -10,12 +12,13 @@ interface FiltroSimuladorProps {
 
 
 export const FiltroSimulador: React.FC<FiltroSimuladorProps> = ({
+    contrato,
     region,
     periodo,
     options
 }) => {
     const changePeriodoHandler = (value: string) => {
-        window.location.replace(`/${region}?periodo=${value}`);
+        window.location.replace(generateUrl(region, value, contrato));
     }
 
     return (

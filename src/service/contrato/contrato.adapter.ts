@@ -8,6 +8,7 @@ import { CreateContratoDto } from "./dto/create-contrato.dto";
 import { UpdateContratoDto } from "./dto/update-contrato.dto";
 import { Contrato } from "./contrato.entity";
 import { RemoveByCenarioDto } from "./dto/remove-by-cenario.dto";
+import { GetSimuladorContratoTableDto } from "./dto/get-simulador-contrato-table.dto";
 
 
 export class ContratoAdapter {
@@ -22,6 +23,10 @@ export class ContratoAdapter {
 
     public async findTableFilters(): Promise<GetTableFilterDto> {
         return await this.adapter.fetch(`/contrato/table/filter`);
+    }
+
+    public async findSimuladorContratoTable(cenario: string, ano: string): Promise<GetSimuladorContratoTableDto> {
+        return await this.adapter.fetch(`/contrato/simulador/table/${cenario}?ano=${ano}`);
     }
 
     public async generate(year: number): Promise<Contrato> {
