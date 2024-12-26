@@ -49,6 +49,7 @@ export const Filters: React.FC<FilterProps> = ({
         ano: ano,
         cenario: cenario
     });
+    const pontoId = ponto.split(" - ")[0];
 
     const changeFilterValue = (key: keyof FilterForm) => (value: string) => {
         setForms({ ...forms, [key]: value });
@@ -59,7 +60,7 @@ export const Filters: React.FC<FilterProps> = ({
     }
 
     const getData = async () => {
-        const data = (await paramAdapter.findDemandaChart(ponto, posto, parseInt(ano))).data;
+        const data = (await paramAdapter.findDemandaChart(pontoId, posto, parseInt(ano))).data;
         console.log(data);
         const distinctDate = new Set(data.map(value => value.data));
         const chartData: DemandaChartData[] = [];
@@ -107,7 +108,7 @@ export const Filters: React.FC<FilterProps> = ({
                 </h1>
                 <div className={styles["chart-info-container"]}>
                     <div style={{ margin: "0 auto", width: "max-content" }}>
-                        <InformationField title="Ponto" value={ponto} style={{ float: "left", width: "min-content" }} />
+                        <InformationField title="Ponto" value={pontoId} style={{ float: "left", width: "min-content" }} />
                         <InformationField title="Ano" value={ano} style={{ float: "left", marginLeft: "20px", width: "min-content" }} />
                     </div>
                 </div>

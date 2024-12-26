@@ -45,7 +45,7 @@ export default async function UploadParamsPage(
                 cenario={context.searchParams.cenario}
                 param={paramFilterHeader}
                 pontoOption={ponto.pontos.map((value) => `${value.id} - ${value.nome}`)}
-                ponto={(context.searchParams.ponto || "").split(" - ")[0]}
+                ponto={context.searchParams.ponto || ""}
             />
 
             {
