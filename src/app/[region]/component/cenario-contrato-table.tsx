@@ -82,7 +82,7 @@ export const CenarioContratoTable: React.FC<CenarioContratoTableProps> = ({
                         </div>
                         <div className={styles["row-cell"]}>
                             <input id={`contrato-ponta-${idx}`} className={styles["row-cell-content"]} defaultValue={parseFloat((row.contratoPonta || 0).toString())} disabled/>
-                            <input id={`contrato-fora-ponta-${idx}`} className={styles["row-cell-content"]} defaultValue={parseFloat((row.contratoForaPonta || 0).toString())} />
+                            <input id={`contrato-fora-ponta-${idx}`} className={styles["row-cell-content"]} defaultValue={parseFloat((row.contratoForaPonta || 0).toString())} disabled />
                         </div>
                         <div className={styles["row-cell"]}>
                             <input className={styles["row-cell-content"]} defaultValue={parseFloat((row.ultimoContratoPonta || 0).toString())} disabled/>
