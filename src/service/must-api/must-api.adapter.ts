@@ -8,8 +8,8 @@ export interface IMustApiAdapter {
 export class MustApiAdapter implements IMustApiAdapter {
     _url: string;
     public constructor() {
-        this._url = "http://172.20.74.21:4042";
-        // this._url = "http://localhost:4042";
+        // this._url = "http://172.20.74.21:4042";
+        this._url = "http://localhost:4042";
     }
 
     public async fetch<T>(uri: string, init?: AxiosRequestConfig): Promise<T> {

@@ -1,5 +1,6 @@
 import { SimuladorContratoTable } from "@/service/contrato/simulador-contrato-table.entity";
 import { PenalidadeAdapter } from "@/service/penalidade/penalidade.adapter";
+import { CenarioContratoTable } from "./component/cenario-contrato-table";
 import { SimuladorAdapter } from "@/service/simulador/simulador.adapter";
 import { ContratoAdapter } from "@/service/contrato/contrato.adapter";
 import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
@@ -13,7 +14,6 @@ import { InformationField } from "./component/info-field";
 import { Region } from "@/types/region";
 import styles from "./page.module.css";
 import { v4 } from "uuid";
-import { CenarioContratoTable } from "./component/cenario-contrato-table";
 
 
 export const generateUrl = (region: Region, periodo?: string, contrato?: string) => {
