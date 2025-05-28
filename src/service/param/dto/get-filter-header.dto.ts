@@ -1,4 +1,5 @@
 export interface GetFilterHeaderDto {
     ano: string[];
-    cenario: string[];
+    demanda: string[];
+    contrato: string[];
 }

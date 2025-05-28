@@ -8,7 +8,7 @@ import { CsvParser } from "@/csv/csv-parser";
 import { PiTableFill } from "react-icons/pi";
 import { useContext, useState } from "react";
 import styles from "./upload-csv.module.css";
-import File from "@/components/input/file";
+import File from "@/components/input/File";
 import { RxUpdate } from "react-icons/rx";
 import { Region } from "@/types/region";
 import { parse } from 'date-fns';
@@ -91,9 +91,9 @@ export const UploadCsv: React.FC<UploadCsvProps> = ({
                         <PiTableFill className={styles.tableIcon}/>
                         <span style={{ color: "#666", marginLeft: 2 }}>confiabilidade</span>
                     </p>
-                    <p className={styles.schemaLine}><span>posto:</span> string ("Ponta", "Fora Ponta") </p>
+                    <p className={styles.schemaLine}><span>posto:</span> {`string ("Ponta", "Fora Ponta")`} </p>
                     <p className={styles.schemaLine}><span>data:</span> Date </p>
-                    <p className={styles.schemaLine}><span>tipoDado:</span> string ("DEMANDA", "TARIFA", "CONFIABILIDADE") </p>
+                    <p className={styles.schemaLine}><span>tipoDado:</span> string {`("DEMANDA", "TARIFA", "CONFIABILIDADE")`} </p>
                     <p className={styles.schemaLine}><span>cenario:</span> string | null </p>
                     <p className={styles.schemaLine}><span>valor:</span> string </p>
                     <p className={styles.schemaLine} style={{ marginBottom: "5px" }}><span>ponto:</span> string // id de um dos pontos </p>

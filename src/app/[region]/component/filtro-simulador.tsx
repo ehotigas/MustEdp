@@ -1,7 +1,7 @@
 "use client"
-import Dropdown from "@/components/input/dropdown";
+import Dropdown from "@/components/input/Dropdown";
+import { generateUrl } from "../generateUrl";
 import { Region } from "@/types/region";
-import { generateUrl } from "../page";
 
 interface FiltroSimuladorProps {
     contrato: string;

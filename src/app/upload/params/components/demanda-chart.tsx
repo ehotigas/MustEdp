@@ -42,7 +42,7 @@ export const DemandaChart: React.FC<DemandaChartProps> = ({
                 <Tooltip />
                 {
                     cenarios.map(
-                        value => <Line type="monotone" dataKey={value.name} stroke={value.color} strokeWidth={2} dot={false} />
+                        (value, idx) => <Line type="monotone" dataKey={value.name} stroke={value.color} strokeWidth={2} dot={false} key={`@cenario-${idx}`} />
                     )
                 }
                 <Legend />

@@ -1,5 +1,5 @@
 import PopupProvider from "@/components/popup/popup-provider";
-import Menu from "@/components/menu/menu";
+import Menu from "@/components/menu/Menu";
 import { Dosis } from "next/font/google";
 import styles from "./layout.module.css";
 import type { Metadata } from "next";

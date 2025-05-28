@@ -1,8 +1,8 @@
 "use client"
-import Dropdown from "@/components/input/dropdown";
+import Dropdown from "@/components/input/Dropdown";
 import styles from "./contrato-filter.module.css";
+import { generateUrl } from "../generateUrl";
 import { Region } from "@/types/region";
-import { generateUrl } from "../page";
 
 
 interface ContratoFilterProps {

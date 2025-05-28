@@ -1,5 +1,4 @@
 "use client"
-import { LiaFileContractSolid } from "react-icons/lia";
 import { useEffect, useRef, useState } from "react";
 import { RiMapPin2Line } from "react-icons/ri";
 import { FaChartBar } from "react-icons/fa";
@@ -47,10 +46,8 @@ export default function Menu() {
                         <div className={styles.headerContainer}>
                             <p className={styles.headerTitle}>Configurações</p>
                         </div>
-                        <LiaFileContractSolid className={styles.linkIcon}/>
-                        <Link className={styles.link} href="/upload/contratos">Alterar Contratos</Link>
                         <FaChartBar className={styles.linkIcon}/>
-                        <Link className={styles.link} href="/upload/params">Alterar Parâmetros</Link>
+                        <Link className={styles.link} href="/upload/params">Alterar Demanda</Link>
                         <RiMapPin2Line className={styles.linkIcon}/>
                         <Link className={styles.link} href="/sp?cenario=Otimista&ponto=Todos&posto=Todos&ano=Todos&penalidade=Todas&contrato=Contrato%20Ótimo">EDP SP</Link>
                         <RiMapPin2Line className={styles.linkIcon}/>

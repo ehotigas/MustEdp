@@ -16,18 +16,6 @@ import styles from "./page.module.css";
 import { v4 } from "uuid";
 
 
-export const generateUrl = (region: Region, periodo?: string, contrato?: string) => {
-    let url = `/${region}?`;
-    if (periodo) {
-        url += `periodo=${periodo}&`
-    }
-    if (contrato) {
-        url += `contrato=${contrato}`
-    }
-    return url;
-}
-
-
 export default async function RegionPage(
     context: {
         params: { region: Region },
@@ -136,7 +124,7 @@ export default async function RegionPage(
                     <p className={styles["header-cell"]} style={{ width: "41%" }}>Custos</p>
             </div>
             <section className={styles["penalidades-container"]}>
-                {penalidades.map((row) => <PenalidadeRow data={row} region={context.params.region} />)}
+                {penalidades.map((row, idx) => <PenalidadeRow data={row} region={context.params.region} key={`@penalidade-row-${idx}`}/>)}
             </section>
         </main>
     );

@@ -13,7 +13,8 @@ export class MustApiAdapter implements IMustApiAdapter {
     }
 
     public async fetch<T>(uri: string, init?: AxiosRequestConfig): Promise<T> {
-        const request = await axios(`${this._url}${uri}`, { ...init });
+        const headers = init && init.headers ? init.headers : {};
+        const request = await axios({ ...init, url: `${this._url}${uri}`, headers: { ...headers, 'Cache-Control': 'no-cache' }});
         return await request.data;
     }
 }

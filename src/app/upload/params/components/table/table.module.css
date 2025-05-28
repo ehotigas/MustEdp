@@ -1,0 +1,80 @@
+.section {
+    float: left;
+}
+
+.table-container {
+    float: left;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 70%;
+}
+
+.date-table-container {
+    border-bottom: solid 2px #000;
+    border-left: solid 2px #000;
+    border-top: solid 2px #000;
+    margin-top: 83px;
+    float: left;
+    width: calc(25% - 2px);
+}
+
+.demand-contract-table-container {
+    float: left;
+    width: 25%;
+}
+
+.subheader-container {
+    border: solid 2px #000;
+    float: left;
+    height: 42px;
+    width: 100%;
+}
+
+.sub-header-info-container {
+    
+    margin: 0 auto;
+    width: 155px;
+}
+
+.header-cell {
+    float: left;
+    font-size: 17px;
+    font-weight: bold;
+    height: 20px;
+    text-align: center;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.body-container {
+    float: left;
+    width: 100%;
+}
+
+.row-container {
+    float: left;
+    width: 100%;
+}
+
+.row-cell-content {
+    background-color: #fff;
+    border: none;
+    color: #000;
+    font-family: 'Dosis';
+    height: 20px;
+    margin: 0 auto;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 3px;
+    text-align: center;
+    width: 70px;
+}
+
+.row-cell {
+    float: left;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+}

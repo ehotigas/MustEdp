@@ -26,8 +26,8 @@ export class ParamAdapter {
         return await this.adapter.fetch(`/param/${id}`);
     }
 
-    public async findParamTable(ponto: string, ano: number, cenario: string): Promise<GetParamTableDto> {
-        return await this.adapter.fetch(`/param/table/${ponto}?&ano=${ano}&cenario=${cenario}`);
+    public async findParamTable(ponto: string, ano: number, demanda: string, contrato: string): Promise<GetParamTableDto> {
+        return await this.adapter.fetch(`/param/table/${ponto}?&ano=${ano}&demanda=${demanda}&contrato=${contrato}`);
     }
 
     public async findDemandaChart(ponto: string, posto: Posto, year: number): Promise<GetDemandaChartDto> {

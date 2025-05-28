@@ -4,7 +4,7 @@ import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
 import { PopupContext } from "@/components/popup/popup-provider";
 import { ParamAdapter } from "@/service/param/param.adapter";
 import { Button } from "@/components/input/button";
-import Dropdown from "@/components/input/dropdown";
+import Dropdown from "@/components/input/Dropdown";
 import styles from "./delete-param.module.css";
 import { useContext, useState } from "react";
 import { BiTrash } from "react-icons/bi";
@@ -46,7 +46,7 @@ export const DeleteParam: React.FC<DeleteParamProps> = ({
             <Dropdown
                 defaultValue={"Selecione uma demanda"}
                 onChange={changeDemandaHandler}
-                options={param.cenario}
+                options={param.demanda}
                 title="Demanda"
             />
             <Button isLoading={isLoading} onClick={deleteButtonClickHandler} style={{ backgroundColor: "#E32C2C", height: "35px", marginLeft: "15px", width: "35px" }}>
