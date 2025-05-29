@@ -59,7 +59,7 @@ export default async function UploadParamsPage(
             />
 
             {
-                data.length > 0 ? <Table2 cenario={context.searchParams.demanda} data={data} ponto={context.searchParams.ponto.includes(" - ") ? context.searchParams.ponto.split(" - ")[0] : ""} /> :
+                data.length > 0 ? <Table2 contrato={context.searchParams.contrato} demanda={context.searchParams.demanda} data={data} ponto={context.searchParams.ponto.includes(" - ") ? context.searchParams.ponto.split(" - ")[0] : ""} /> :
                 <p className={styles["message"]}>Sem dados. Tente alterar os filtros e clique no botão {`"pesquisar"`}.</p>
             }
             

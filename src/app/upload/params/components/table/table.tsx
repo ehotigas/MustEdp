@@ -9,7 +9,8 @@ import { DemandTable } from "./demand-table";
 import styles from "./table.module.css";
 
 type TableProps = {
-    cenario: string;
+    demanda: string;
+    contrato: string;
     data: ParamTable[];
     ponto: string;
 };
@@ -22,7 +23,7 @@ type TableProps = {
 //     return sum.toFixed(3);
 // }
 
-export const Table2: React.FC<TableProps> = ({ cenario, data, ponto }) => {
+export const Table2: React.FC<TableProps> = ({ contrato, demanda, data, ponto }) => {
     const popup = useContext(PopupContext);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -35,6 +36,7 @@ export const Table2: React.FC<TableProps> = ({ cenario, data, ponto }) => {
         try {
             if (demandTableRef && demandTableRef.current) await demandTableRef.current.save();
             if (contractTableRef && contractTableRef.current) await contractTableRef.current.save();
+            // await new Promise((resolve) => setTimeout(resolve, 5000));
             window.location.reload();
         } catch(error) {
             console.log(error);
@@ -58,9 +60,9 @@ export const Table2: React.FC<TableProps> = ({ cenario, data, ponto }) => {
                         ))
                     }
                 </div>
-                <DemandTable cenario={cenario} data={data} ponto={ponto} ref={demandTableRef}/>
-                <ContractTable cenario={cenario} data={data} ponto={ponto} ref={contractTableRef}/>
-                <LastYearContractTable cenario={cenario} data={data} ponto={ponto}/>
+                <DemandTable cenario={demanda} data={data} ponto={ponto} ref={demandTableRef}/>
+                <ContractTable cenario={contrato} data={data} ponto={ponto} ref={contractTableRef}/>
+                <LastYearContractTable cenario={contrato} data={data} ponto={ponto}/>
             </section>
         
             <section className={styles["table-container"]} style={{ marginTop: "0px" }}>

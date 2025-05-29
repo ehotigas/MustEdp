@@ -35,7 +35,7 @@ export const ContractTable = forwardRef<ContractTableHandle, ContractTableProps>
         const api = new MustApiAdapter();
         const contratoAdapter = new ContratoAdapter(api);
         
-        const [inputData, setInputData] = useState<ParamTable[]>([...data]);
+        const [inputData, setInputData] = useState<ParamTable[]>(structuredClone(data));
 
         const contractChangeEventHandler = (posto: Posto) => (e: React.ChangeEvent<HTMLInputElement>) => {
             const copy = [...inputData];
@@ -85,6 +85,7 @@ export const ContractTable = forwardRef<ContractTableHandle, ContractTableProps>
                 await contratoAdapter.saveByDemanda({ data: row.data.toString().slice(0, 10), cenario, ponto, valor: row.contratoPonta, posto: Posto.PONTA });
                 await contratoAdapter.saveByDemanda({ data: row.data.toString().slice(0, 10), cenario, ponto, valor: row.contratoForaPonta, posto: Posto.FORA_PONTA });
             }
+            console.log(`contrato`, inputData);
         };
         
         useImperativeHandle(ref, () => ({

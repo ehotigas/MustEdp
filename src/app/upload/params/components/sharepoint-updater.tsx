@@ -1,7 +1,6 @@
 "use client"
-import { SharepointContratoAdapter } from "@/service/sharepoint/contrato/contrato.adapter";
+import { SharepointDemandaRealizadaAdapter } from "@/service/sharepoint/demanda-realizada/demanda-realizada.adapter";
 import { SharepointDemandaAdapter } from "@/service/sharepoint/demanda/demanda.adapter";
-import { SharepointParamsAdapter } from "@/service/sharepoint/params/params.adapter";
 import { MustApiAdapter } from "@/service/must-api/must-api.adapter";
 import { Button } from "@/components/input/button";
 import { useState } from "react";
@@ -10,16 +9,14 @@ import { useState } from "react";
 export const SharepointUpdater = () => {
     const api = new MustApiAdapter();
     const demanda = new SharepointDemandaAdapter(api);
-    const contrato = new SharepointContratoAdapter(api);
-    const param = new SharepointParamsAdapter(api);
+    const demandaRealizada = new SharepointDemandaRealizadaAdapter(api);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const buttonClickHandler = async () => {
         setIsLoading(true);
-        await contrato.update();
-        await param.update();
         await demanda.update();
+        await demandaRealizada.update();
         setIsLoading(false);
         window.location.reload();
     }

@@ -38,7 +38,7 @@ export const DemandTable = forwardRef<DemandTableHandle, DemandTableProps> (
         const api = new MustApiAdapter();
         const paramAdapter = new ParamAdapter(api);
 
-        const [inputData, setInputData] = useState<ParamTable[]>([...data]);
+        const [inputData, setInputData] = useState<ParamTable[]>(structuredClone(data));
         
         const demandChangeEventHandler = (posto: Posto, idx: number) => (value: React.ChangeEvent<HTMLInputElement>) => {
             const copy = [...inputData];
@@ -53,6 +53,7 @@ export const DemandTable = forwardRef<DemandTableHandle, DemandTableProps> (
                 await paramAdapter.save({ data: row.data.toString().slice(0, 10), cenario, ponto, tipoDado: DataType.DEMANDA, valor: row.demandaPonta, posto: Posto.PONTA });
                 await paramAdapter.save({ data: row.data.toString().slice(0, 10), cenario, ponto, tipoDado: DataType.DEMANDA, valor: row.demandaForaPonta, posto: Posto.FORA_PONTA });
             }
+            console.log(`demanda`, inputData);
         };
         
         useImperativeHandle(ref, () => ({
