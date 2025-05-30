@@ -18,6 +18,19 @@ type PenalityChartProps = {
 };
 
 export const PenalityChart: React.FC<PenalityChartProps> = ({ data }) => {
+    const chartFormatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        maximumFractionDigits: 0,
+        // currency: 'BRL'
+    });
+
+    const legendFormatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        maximumFractionDigits: 0,
+        // currency: 'BRL'
+    });
+      
+    
     return (
         <div style={{ width: "100%", float: "left", height: "400px" }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -83,7 +96,6 @@ export const PenalityChart: React.FC<PenalityChartProps> = ({ data }) => {
                             return formattedValues[value as keyof typeof formattedValues] || value;
                           }}
                         wrapperStyle={{ paddingTop: "0px", fontSize: "12px", fontWeight: "bold" }}
-                        
                     />
                     <Bar dataKey="add" barSize={15} fill="#DF6A41" stackId="b" opacity={.8}>
                         <LabelList
@@ -92,7 +104,7 @@ export const PenalityChart: React.FC<PenalityChartProps> = ({ data }) => {
                             fill="#DF6A41" // Cor do texto
                             fontSize={9}
                             fontWeight="bold"
-                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${parseFloat(value.toString()).toFixed(0)}M` : ""} // Formatação personalizada
+                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${chartFormatter.format(parseFloat(value.toString()))}M` : ""} // Formatação personalizada
                         />
                     </Bar>
                     <Bar dataKey="piu" barSize={15} fill="#edae98" stackId="b" opacity={.8}>
@@ -102,7 +114,7 @@ export const PenalityChart: React.FC<PenalityChartProps> = ({ data }) => {
                             fill="#edae98" // Cor do texto
                             fontSize={9}
                             fontWeight="bold"
-                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${parseFloat(value.toString()).toFixed(0)}M` : ""} // Formatação personalizada
+                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${chartFormatter.format(parseFloat(value.toString()))}M` : ""} // Formatação personalizada
                         />
                     </Bar>
                     <Bar dataKey="pis" barSize={15} fill="#332D38" stackId="b" opacity={.8}>
@@ -112,7 +124,7 @@ export const PenalityChart: React.FC<PenalityChartProps> = ({ data }) => {
                             fill="#332D38" // Cor do texto
                             fontSize={9}
                             fontWeight="bold"
-                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${parseFloat(value.toString()).toFixed(0)}M` : ""} // Formatação personalizada
+                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${chartFormatter.format(parseFloat(value.toString()))}M` : ""} // Formatação personalizada
                         />
                     </Bar>
                 </ComposedChart>

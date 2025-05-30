@@ -18,7 +18,20 @@ type YearDemandChartProps = {
 export const YearDemandChart: React.FC<YearDemandChartProps> = ({ data }) => {
     const getMaxValue = (dataKey: "contrato" | "demanda" | "eust" | "penalidades") => {
         return (Math.max(...data.map(item => item[dataKey])) * 1.9).toFixed(0); // +20% do valor máximo
-      };      
+      };
+    const chartFormatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        maximumFractionDigits: 0,
+        // currency: 'BRL'
+    });
+
+    const legendFormatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        maximumFractionDigits: 0,
+        // currency: 'BRL'
+    });
+      
+      
     return (
         <div style={{ width: "100%", float: "left", height: "400px" }}>
             <ResponsiveContainer width="103%" height="100%">
@@ -61,9 +74,9 @@ export const YearDemandChart: React.FC<YearDemandChartProps> = ({ data }) => {
                               penalidades: "Penalidades",
                             }[name];
                             if (["eust", "penalidades"].includes(name as string)) {
-                                return [`R$ ${parseFloat(value.toString()).toFixed(3)} M`, formattedName];
+                                return [`R$ ${legendFormatter.format(parseFloat(value.toString()))} M`, formattedName];
                             }
-                            return [`${value} MW`, formattedName];
+                            return [`${legendFormatter.format(parseFloat(value.toString()))} MW`, formattedName];
                           }}
                           labelFormatter={(label) => {
                             return `Mês: ${format(parseISO(label), "MM/yyyy", { locale: pt })}`;
@@ -91,7 +104,7 @@ export const YearDemandChart: React.FC<YearDemandChartProps> = ({ data }) => {
                             fill="#263CC8" // Cor do texto
                             fontSize={9}
                             fontWeight="bold"
-                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${parseFloat(value.toString()).toFixed(0)}MW` : ""} // Formatação personalizada
+                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${chartFormatter.format(parseFloat(value.toString()))}MW` : ""} // Formatação personalizada
                         />
                     </Line>
                     <Line strokeWidth={1.5} type="monotone" dataKey="contrato" stroke="#E32C2C" xAxisId="0" yAxisId="left">
@@ -101,10 +114,10 @@ export const YearDemandChart: React.FC<YearDemandChartProps> = ({ data }) => {
                             fill="#E32C2C" // Cor do texto
                             fontSize={9}
                             fontWeight="bold"
-                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${parseFloat(value.toString()).toFixed(0)}MW` : ""} // Formatação personalizada
+                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${chartFormatter.format(parseFloat(value.toString()))}MW` : ""} // Formatação personalizada
                         />
                     </Line>
-                    <Bar dataKey="eust" barSize={15} fill="#332D38" stackId="a" opacity={.5} yAxisId="right" >
+                    {/* <Bar dataKey="eust" barSize={15} fill="#332D38" stackId="a" opacity={.5} yAxisId="right" >
                         <LabelList
                             dataKey="eust" 
                             position={"top"} // top, insideTop, insideMiddle, insideBottom, etc.
@@ -113,7 +126,7 @@ export const YearDemandChart: React.FC<YearDemandChartProps> = ({ data }) => {
                             fontWeight="bold"
                             formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${parseFloat(value.toString()).toFixed(0)}M` : ""} // Formatação personalizada
                         />
-                    </Bar>
+                    </Bar> */}
                     <Bar dataKey="penalidades" barSize={15} fill="#DF6A41" stackId="b" opacity={.5} yAxisId="right" >
                         <LabelList
                             dataKey="penalidades" 
@@ -121,7 +134,7 @@ export const YearDemandChart: React.FC<YearDemandChartProps> = ({ data }) => {
                             fill="#DF6A41" // Cor do texto
                             fontSize={9}
                             fontWeight="bold"
-                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${parseFloat(value.toString()).toFixed(0)}M` : ""} // Formatação personalizada
+                            formatter={(value: number) => parseFloat(value.toString()) > 1 ? `${chartFormatter.format(parseFloat(value.toString()))}M` : ""} // Formatação personalizada
                         />
                     </Bar>
                 </ComposedChart>
