@@ -53,7 +53,7 @@ export const YearDemandChart: React.FC<YearDemandChartProps> = ({ data }) => {
 
                     <CartesianGrid stroke="#f5f5f5" />
                     <XAxis dataKey="data" tickFormatter={(tick) => format(parseISO(tick), 'MM/yyyy', { locale: pt })} angle={0} fontSize={14}/>
-                    <YAxis fontSize={14} yAxisId="right" orientation="right" domain={[0, (dataMax: number) => getMaxValue("eust")]} />
+                    <YAxis fontSize={14} yAxisId="right" orientation="right" domain={[0, (dataMax: number) => getMaxValue("penalidades")]} />
                     <YAxis fontSize={14} yAxisId="left" orientation="left" />
                     <Tooltip
                         contentStyle={{
