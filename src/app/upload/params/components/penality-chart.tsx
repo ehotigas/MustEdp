@@ -19,16 +19,14 @@ type PenalityChartProps = {
 
 export const PenalityChart: React.FC<PenalityChartProps> = ({ data }) => {
     const chartFormatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
         maximumFractionDigits: 0,
         // currency: 'BRL'
     });
 
-    const legendFormatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        maximumFractionDigits: 0,
-        // currency: 'BRL'
-    });
+    // const legendFormatter = new Intl.NumberFormat('pt-BR', {
+    //     maximumFractionDigits: 0,
+    //     // currency: 'BRL'
+    // });
       
     
     return (

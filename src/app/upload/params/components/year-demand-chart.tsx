@@ -20,14 +20,12 @@ export const YearDemandChart: React.FC<YearDemandChartProps> = ({ data }) => {
         return (Math.max(...data.map(item => item[dataKey])) * 1.9).toFixed(0); // +20% do valor máximo
       };
     const chartFormatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
         maximumFractionDigits: 0,
         // currency: 'BRL'
     });
 
     const legendFormatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        maximumFractionDigits: 0,
+        maximumFractionDigits: 3,
         // currency: 'BRL'
     });
       
