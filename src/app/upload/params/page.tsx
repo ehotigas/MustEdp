@@ -14,6 +14,7 @@ import { Filters } from "./components/filters";
 import { Region } from "@/types/region";
 import styles from "./page.module.css";
 import { Posto } from "@/types/posto";
+import { GenerateContracts } from "./components/generate-contracts";
 
 
 export default async function UploadParamsPage(
@@ -86,6 +87,11 @@ export default async function UploadParamsPage(
                 <h1 className={styles["main-title"]}>Atualizar Dados Sharepoint </h1>
             </header>
             <SharepointUpdater />
+
+            <header className={styles["header-container"]}>
+                <h1 className={styles["main-title"]}>Gerar Contrato Ótimo</h1>
+            </header>
+            <GenerateContracts/>
 
             <header className={styles["header-container"]}>
                 <h1 className={styles["main-title"]}>Deletar Parâmetros </h1>
