@@ -33,9 +33,9 @@ export const YearDemandaChartSection: React.FC<YearDemandaChartSection> = async 
             }));
             default: return data.map((value) => ({
                 data: value.data,
-                contrato: parseFloat(value.contratoPonta.toString() || "0") + parseFloat(value.contratoForaPonta.toString() || "0"),
-                demanda: parseFloat(value.demandaPonta.toString() || "0") + parseFloat(value.demandaForaPonta.toString() || "0"),
-                eust: parseFloat(value.eustPonta.toString() || "0") + parseFloat(value.eustForaPonta.toString() || "0"),
+                contrato: Math.max(parseFloat(value.contratoPonta.toString() || "0"), parseFloat(value.contratoForaPonta.toString() || "0")),
+                demanda: Math.max(parseFloat(value.demandaPonta.toString() || "0"), parseFloat(value.demandaForaPonta.toString() || "0")),
+                eust: Math.max(parseFloat(value.eustPonta.toString() || "0"), parseFloat(value.eustForaPonta.toString() || "0")),
                 penalidades: parseFloat(value.addPonta.toString() || "0") + parseFloat(value.addForaPonta.toString() || "0") +
                              parseFloat(value.piuPonta.toString() || "0") + parseFloat(value.piuForaPonta.toString() || "0") +
                              parseFloat(value.pisPonta.toString() || "0") + parseFloat(value.pisForaPonta.toString() || "0")
