@@ -37,7 +37,7 @@ export const Table2: React.FC<TableProps> = ({ contrato, demanda, data, ponto })
             if (demandTableRef && demandTableRef.current) await demandTableRef.current.save();
             if (contractTableRef && contractTableRef.current) await contractTableRef.current.save();
             // await new Promise((resolve) => setTimeout(resolve, 5000));
-            // window.location.reload();
+            window.location.reload();
         } catch(error) {
             console.log(error);
             popup("Erro", `Erro ao atualizar dados. ${(error as any).message}.`, "red");
