@@ -89,10 +89,10 @@ export default async function RegionPage(
             <div className={styles["table-container"]}>
                 <div className={styles["table-header-container"]}>
                     <div className={styles["table-header-cell"]} style={{ marginLeft: "4%" }}>
-                        Cenário de Demanda
+                        Contrato
                     </div>
                     <div className={styles["table-header-cell"]}>
-                        Contrato Ótimo
+                        Somatório Ótimo
                     </div>
                     <div className={styles["table-header-cell"]}>
                         Demandas
